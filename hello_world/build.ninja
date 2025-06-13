@@ -1,0 +1,13 @@
+# Rule to compile CUDA file with clang++
+rule compile_cuda
+  command = clang++ main.cu --offload-arch=native -foffload-via-llvm -o main -O3 -fgpu-rdc
+
+# Build the 'main' executable from 'main.cu'
+build main: compile_cuda main.cu
+
+# Rule to run the compiled executable
+rule run_main
+  command = ./main
+
+# 'run' target: depends on 'main', then runs it
+build run: run_main | main
