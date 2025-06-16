@@ -479,14 +479,13 @@ template <size_t... Ns>
 bool run(const Params &p, const std::vector<size_t> &wgsizes, const std::vector<size_t> &ppwis) {
   static_assert(sizeof...(Ns) > 0, "compile-time PPWI args must be non-empty");
 
-  std::unordered_map<size_t, std::function<const std::vector<Device>()>> enumerate = {{Ns, []() {
+  std::unordered_map<size_t, std::function<const std::vector<Device>()>> enumerate = {std::make_pair(Ns, []() {
                                                                                          auto bude = IMPL_CLS<Ns>();
                                                                                          return bude.enumerateDevices();
-                                                                                       }}...};
+                                                                                       })...};
 
   std::unordered_map<size_t, std::function<const Sample(size_t, size_t)>> kernel = {
-      //
-      {Ns, [&p](size_t wgsize, size_t device) {
+    std::make_pair(Ns, [&p](size_t wgsize, size_t device) {
          auto bude = IMPL_CLS<Ns>();
          auto hp = std::make_unique<Params>(p);
          if (!bude.compatible(*hp, wgsize, device)) {
@@ -494,7 +493,7 @@ bool run(const Params &p, const std::vector<size_t> &wgsizes, const std::vector<
                      << std::endl;
          }
          return bude.fasten(*hp, wgsize, device);
-       }}...};
+       })...};
 
   auto devices = enumerate[ppwis[0]]();
   if (devices.empty()) std::cerr << " # (no devices available)" << std::endl;
