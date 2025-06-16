@@ -2,7 +2,7 @@
 
 #include <initializer_list>
 #ifdef __clang__
-#include <offload/cuda_runtime.h>
+#include <offload/cuda/cuda_runtime.h>
 #endif
 
 // CUDA kernel function: Each thread will execute this function
