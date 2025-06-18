@@ -4,6 +4,10 @@
 #include <iostream>
 #include <string>
 
+#include <offload/cuda/cuda_runtime.h>
+#include <cmath>
+using namespace std;
+
 #ifdef IMPL_CLS
   #error IMPL_CLS was already defined
 #endif

@@ -1,14 +1,14 @@
-# Rule to compile with clang++
-# rule compile_cuda
-#  command = clang++ main.cu --offload-arch=native -foffload-via-llvm -o main -O3 -fgpu-rdc
+# Rule to compile with offload
+rule compile
+  command = model=cuda_offload ./build.sh
 
-#build main: compile_cuda main.cu
+build main: compile
 
-# Rule to run the clang++-compiled executable
-#rule run_main
-#  command = ./main
+# Rule to run the offload-compiled executable
+rule run
+  command = ( cd build && echo "" && echo "" && echo "Run Benchmark:" && ./cuda_offload-bude )
 
-#build run: run_main | main
+build run: run | main
 
 # Rule to compile with nvcc
 rule compile_nvcc

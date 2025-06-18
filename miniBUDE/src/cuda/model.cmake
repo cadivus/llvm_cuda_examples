@@ -54,7 +54,7 @@ macro(setup)
     # since we're doing a single-source w/ templated kernel build
     # everything is a CUDA file
 
-    set_source_files_properties(src/main.cpp PROPERTIES LANGUAGE CUDA)
+    set_source_files_properties(src/main.cu PROPERTIES LANGUAGE CUDA)
 
 
     message(STATUS "NVCC flags: ${CMAKE_CUDA_FLAGS} ${CMAKE_CUDA_FLAGS_${BUILD_TYPE}}")

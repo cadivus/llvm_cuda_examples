@@ -20,6 +20,7 @@ endif ()
 
 # the final executable name
 set(EXE_NAME bude)
+set_source_files_properties(src/main.cu PROPERTIES LANGUAGE CXX)
 
 # for chrono and some basic CXX features, models can overwrite this if required
 set(CMAKE_CXX_STANDARD 17)
@@ -162,7 +163,7 @@ register_model(std-indices STD_INDICES fasten.hpp)
 register_model(std-ranges STD_RANGES fasten.hpp) # TODO
 register_model(hip HIP fasten.hpp)
 register_model(cuda CUDA fasten.hpp)
-register_model(cuda_offload CUDA_OFFLOAD fasten.hpp)
+register_model(cuda_offload CUDA_OFFLOAD fasten.cu)
 register_model(kokkos KOKKOS fasten.hpp)
 register_model(sycl SYCL fasten.hpp)
 register_model(acc ACC fasten.hpp)
@@ -193,7 +194,7 @@ endif ()
 registered_flags_action(check RESULT)
 message(STATUS "${RESULT}")
 
-list(APPEND IMPL_SOURCES src/main.cpp)
+list(APPEND IMPL_SOURCES src/main.cu)
 
 # run model specific setup, i.e append build flags, etc
 setup()

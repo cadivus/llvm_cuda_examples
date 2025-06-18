@@ -55,7 +55,7 @@
 #if defined(CUDA)
   #include "cuda/fasten.hpp"
 #elif defined(CUDA_OFFLOAD)
-  #include "cuda_offload/fasten.hpp"
+  #include "cuda_offload/fasten.cu"
 #elif defined(STD_INDICES)
   #include "std-indices/fasten.hpp"
 #elif defined(STD_RANGES)

@@ -80,7 +80,7 @@ macro(setup)
     if (ENABLE_CUDA)
         # RAJA needs the codebase to be compiled with nvcc, so we tell cmake to treat sources as *.cu
         enable_language(CUDA)
-        set_source_files_properties(src/main.cpp PROPERTIES LANGUAGE CUDA)
+        set_source_files_properties(src/main.cu PROPERTIES LANGUAGE CUDA)
     endif ()
 
     register_append_compiler_and_arch_specific_cxx_flags(

@@ -13,6 +13,10 @@ if [ "$model" = "cuda_native" ]; then
     model="cuda"
 fi
 
+if [ "$model" = "cuda_offload" ]; then
+    flags="-DCMAKE_CXX_COMPILER=$(which clang++)"
+fi
+
 cmake -B "$BUILD_DIR" -H. \
     -DCMAKE_BUILD_TYPE=Release \
     -DMODEL="$model" $flags

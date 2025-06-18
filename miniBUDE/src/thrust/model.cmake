@@ -84,12 +84,13 @@ macro(setup)
         endif ()
 
         # for HIP we treat *.cu files as CXX otherwise CMake doesn't compile them
-        set_source_files_properties(src/main.cpp PROPERTIES LANGUAGE CXX)
+        set_source_files_properties(src/main.cu PROPERTIES LANGUAGE CXX)
 
         register_link_library(roc::rocthrust)
     else ()
         message(FATAL_ERROR "Unsupported THRUST_IMPL provided: ${THRUST_IMPL}")
     endif ()
+    set_source_files_properties(src/main.cu PROPERTIES LANGUAGE CXX)
 
 
 endmacro()
