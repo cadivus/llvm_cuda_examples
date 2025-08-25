@@ -1,0 +1,11 @@
+# Rule to compile with clang++
+rule compile
+  command = clang++ --version && rm -f main && clang++ -fopenmp --offload-arch=native main.cpp -o main && ls
+
+build main: compile main.cpp
+
+# Rule to run the clang++-compiled executable
+rule run_main
+  command = OMP_TARGET_OFFLOAD=MANDATORY ./main
+
+build run: run_main | main
